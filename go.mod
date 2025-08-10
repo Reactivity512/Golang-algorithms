@@ -1,3 +1,3 @@
 module github.com/Reactivity512/Golang-algorithms
 
-go 1.22.0
+go 1.23
