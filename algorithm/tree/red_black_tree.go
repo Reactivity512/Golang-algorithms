@@ -1,14 +1,21 @@
 package tree
 
-const (
+/*const (
 	RED   = true
 	BLACK = false
+)*/
+
+const (
+	RED   Color = true
+	BLACK Color = false
 )
+
+type Color bool
 
 // Узел красно-черного дерева
 type NodeRBT struct {
 	Value  int
-	Color  bool // true - красный, false - черный
+	Color  Color // true - красный, false - черный
 	Left   *NodeRBT
 	Right  *NodeRBT
 	Parent *NodeRBT
@@ -20,7 +27,7 @@ type RedBlackTree struct {
 }
 
 // Создание нового узла
-func NewNode(value int, color bool) *NodeRBT {
+func NewNode(value int, color Color) *NodeRBT {
 	return &NodeRBT{
 		Value: value,
 		Color: color,
@@ -59,10 +66,10 @@ func (t *RedBlackTree) insertNode(root, newNode *NodeRBT) {
 
 // Балансировка дерева после вставки
 func (t *RedBlackTree) fixInsert(node *NodeRBT) {
-	for node.Parent != nil && node.Parent.Color == RED {
+	for node.Parent != nil && node.Parent.Color == RED { //nolint:S1002
 		if node.Parent == node.Parent.Parent.Left {
 			uncle := node.Parent.Parent.Right
-			if uncle != nil && uncle.Color == RED {
+			if uncle != nil && uncle.Color == RED { //nolint:S1002
 				// красный
 				node.Parent.Color = BLACK
 				uncle.Color = BLACK
